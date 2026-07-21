@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Font Family Definitions mapped to imported Google Fonts */
+  --font-sfc-primorsa: "SFC Primorsa", serif;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-grotesk: "Space Grotesk", sans-serif;
+
+  /* Custom Color System */
+  --color-gold: #C5A85C;
+  --color-gold-hover: #A3843C;
+  --color-gold-light: #F5EEE3;
+  --color-warm-brown: #593E30;
+  --color-warm-brown-dark: #3F2C22;
+  --color-luxury-black: #0C0C0C;
+  --color-luxury-gray: #555555;
+  --color-luxury-bg: #F3EBDD;
+
+  /* Luxury Warm Neutral Background Palette */
+  --color-primary-bg: #F8F4EC;
+  --color-secondary-bg: #F3EBDD;
+  --color-section-alt: #EFE5D4;
+  --color-card-bg: #FCFAF6;
+  
+  --animate-spin-slow: spin 20s linear infinite;
+}
+
+/* Custom Base Styles for Premium feel */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-primary-bg);
+  color: var(--color-luxury-black);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  font-family: var(--font-sfc-primorsa);
+}
+
+h2 {
+  font-family: var(--font-sans);
+}
+
+h3 {
+  font-family: var(--font-grotesk);
+}
+
+button {
+  font-family: var(--font-grotesk);
+}
+
+/* Glassmorphism scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F4EC;
+}
+::-webkit-scrollbar-thumb {
+  background: #C5A85C;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A3843C;
+}
+
+/* Hide default horizontal scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

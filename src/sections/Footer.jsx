@@ -37,7 +37,7 @@ const Footer = () => {
            <img
                         src={logo}
                         alt="Zamindar Catering"
-                        className="h-12 md:h-18 lg:h-22 w-auto object-contain"
+                        className="h-18 md:h-20 lg:h-32 w-auto object-contain"
                       />
             </Link>
             

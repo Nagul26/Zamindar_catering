@@ -41,8 +41,8 @@ const Navigation = () => {
         <div
           className={`pointer-events-auto w-full max-w-[1450px] bg-card-bg/90 backdrop-blur-md rounded-full border border-warm-brown/10 shadow-[0_10px_35px_rgba(0,0,0,0.08)] flex items-center justify-between transition-all duration-300 ease-in-out ${
             isScrolled
-              ? 'py-2.5 px-6 lg:px-8 shadow-[0_12px_40px_rgba(0,0,0,0.12)] bg-card-bg/95'
-              : 'py-3.5 px-6 lg:px-10'
+              ? 'py-2.2 px-6 lg:px-8 shadow-[0_12px_40px_rgba(0,0,0,0.12)] bg-card-bg/95'
+              : 'py-3.0 px-6 lg:px-10'
           }`}
         >
           {/* Logo */}
@@ -57,7 +57,7 @@ const Navigation = () => {
               transition={{ duration: 0.3 }}
               src={logo}
               alt="Zamindar Catering"
-              className="h-10 sm:h-12 lg:h-14 w-auto object-contain rounded-md"
+              className="h-16 sm:h-20 lg:h-22 w-auto object-contain rounded-md"
             />
           </Link>
 

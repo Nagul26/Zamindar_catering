@@ -89,7 +89,7 @@ const Gallery = () => {
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`font-grotesk text-xs uppercase tracking-widest px-6 py-2.5 transition-all duration-300 border focus:outline-none ${
+              className={`font-sans text-xs uppercase tracking-widest px-6 py-2.5 transition-all duration-300 border focus:outline-none ${
                 activeFilter === filter
                   ? 'bg-luxury-black text-white border-luxury-black'
                   : 'bg-card-bg text-luxury-gray border-warm-brown/10 hover:border-gold hover:text-luxury-black'
@@ -132,7 +132,7 @@ const Gallery = () => {
                   >
                     <HiOutlinePlus size={20} />
                   </motion.div>
-                  <span className="font-grotesk text-[10px] tracking-[0.2em] text-gold uppercase mb-1">
+                  <span className="font-sans text-[10px] tracking-[0.2em] text-gold uppercase mb-1">
                     {item.category}
                   </span>
                   <h4 className="font-sfc-primorsa text-white text-lg font-light tracking-wide">
@@ -178,7 +178,7 @@ const Gallery = () => {
                 className="max-w-full max-h-[75vh] object-contain border border-white/10"
               />
               <div className="text-center mt-6">
-                <span className="font-grotesk text-xs tracking-[0.25em] text-gold uppercase mb-1 block">
+                <span className="font-sans text-xs tracking-[0.25em] text-gold uppercase mb-1 block">
                   {selectedImage.category}
                 </span>
                 <h4 className="font-sfc-primorsa text-white text-2xl font-light tracking-wide">

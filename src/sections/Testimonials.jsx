@@ -106,7 +106,7 @@ const Testimonials = () => {
 
               {/* Author & Info */}
               <div className="flex flex-col items-center">
-                <span className="font-grotesk text-sm uppercase tracking-widest text-luxury-black font-semibold mb-1">
+                <span className="font-sans text-sm uppercase tracking-widest text-luxury-black font-semibold mb-1">
                   {testimonials[activeIndex].author}
                 </span>
                 <span className="font-sans text-xs tracking-wider text-gold uppercase">

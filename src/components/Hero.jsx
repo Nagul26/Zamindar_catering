@@ -1,157 +1,431 @@
-  import React, { useRef } from 'react';
-  import { motion, useScroll } from 'framer-motion';
-  import { Link as ScrollLink } from 'react-scroll';
-  import HeroVideo from './HeroVideo';
-  import ScrollIndicator from './ScrollIndicator';
+import React, { useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Link as ScrollLink } from "react-scroll";
+import HeroVideo from "./HeroVideo";
+import left from "../assets/images/hero-left.png";
+import right from "../assets/images/hero-right.png";
+import ScrollIndicator from "./ScrollIndicator";
 
-  /**
-   * Hero Component
-   * 
-   * Main luxury Hero section featuring full-viewport autoplay video background,
-   * Framer Motion fade-up animations, CTAs, statistics bar, and dynamic SVG scroll progress indicator.
-   */
-  const Hero = () => {
-    const heroRef = useRef(null);
 
-    // Track scroll progress across the entire page
-    const { scrollYProgress } = useScroll();
+const Hero = () => {
+  const heroRef = useRef(null);
 
-    const containerVariants = {
-      hidden: { opacity: 0 },
-      visible: {
-        opacity: 1,
-        transition: {
-          staggerChildren: 0.18,
-          delayChildren: 0.2,
-        },
+  const { scrollY } = useScroll();
+
+  const videoScale = useTransform(scrollY, [0, 1000], [1.05, 1.18]);
+
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    if (window.innerWidth < 1024) return;
+
+    const { clientX, clientY } = e;
+
+    const x = (clientX - window.innerWidth / 2) / 40;
+    const y = (clientY - window.innerHeight / 2) / 40;
+
+    setMousePos({ x, y });
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
       },
-    };
+    },
+  };
 
-    const itemVariants = {
-      hidden: { opacity: 0, y: 35 },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 40,
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.9,
       },
-    };
+    },
+  };
 
-    const statItems = [
-      { number: '1,000+', label: 'Events Hosted' },
-      { number: '50K+', label: 'Happy Guests' },
-      { number: '15+', label: 'Years of Luxury' },
-    ];
+  return (
+    <section
+      ref={heroRef}
+      id="home"
+      onMouseMove={handleMouseMove}
+      className="relative h-[1000px] overflow-hidden bg-black"
+    >
+      {/* Video */}
 
-    return (
-      <section
-        ref={heroRef}
-        id="home"
-        className="relative h-screen w-full overflow-hidden flex items-center bg-black"
+      <motion.div
+        style={{
+          scale: videoScale,
+        }}
+        className="absolute inset-0"
       >
-        {/* Full-Screen Autoplay Background Video */}
         <HeroVideo
           videoSrc="/videos/hero-bg.mp4"
-          overlayOpacity={0.45}
+          overlayOpacity={0.75}
         />
+      </motion.div>
 
-        {/* Hero Main Content */}
-        <div className="relative z-20 max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col justify-center h-full pt-20">
+      {/* Brown Overlay */}
+
+      <div className="absolute inset-0 bg-[#3D220B]/55 z-10" />
+
+      {/* Main Content */}
+
+      <div className="relative z-30 flex items-center justify-center min-h-screen px-6">
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="relative w-full max-w-7xl mx-auto"
+        >
+
+          {/* LEFT IMAGE */}
+
+          <motion.img
+            src={left}
+            alt="hero-left"
+            style={{
+              x: mousePos.x * 0.4,
+              y: mousePos.y * 0.4,
+            }}
+            animate={{
+              y: [0, -15, 0],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+            }}
+            className="
+            hidden
+            lg:block
+            absolute
+            left-0
+            top-20
+            w-[360px]
+            rounded-[28px]
+            rotate-[-8deg]
+            shadow-2xl
+            object-cover
+            "
+          />
+
+          {/* RIGHT IMAGE */}
+
+          <motion.img
+            src={right}
+            alt="hero-right"
+            style={{
+              x: mousePos.x * -0.3,
+              y: mousePos.y * -0.3,
+            }}
+            animate={{
+              y: [0, 15, 0],
+            }}
+            transition={{
+              duration: 7,
+              repeat: Infinity,
+            }}
+            className="
+            hidden
+            lg:block
+            absolute
+            right-0
+            top-0
+            w-[300px]
+            rounded-[28px]
+            rotate-[8deg]
+            shadow-2xl
+            object-cover
+            "
+          />
+
+          {/* CENTER CONTENT */}
+
           <motion.div
             variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="max-w-4xl"
+            className="
+            relative
+            z-40
+            flex
+            flex-col
+            items-center
+            justify-center
+            text-center
+            max-w-5xl
+            mx-auto
+            py-40
+            "
           >
-            {/* Subtitle Tagline */}
             <motion.span
               variants={itemVariants}
-              className="text-gold font-grotesk uppercase tracking-[0.3em] text-xs sm:text-sm font-semibold mb-4 block"
+              className="
+              uppercase
+              tracking-[0.35em]
+              text-[#E0B15B]
+              text-xs
+              md:text-sm
+              font-semibold
+              mb-5
+              "
             >
-              Fine Culinary Artistry
+              ✦ THE BEST EVENTS START HERE
             </motion.span>
 
-            {/* H1 Heading */}
             <motion.h1
               variants={itemVariants}
-              className="text-white font-sfc-primorsa font-light text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[1.1] mb-6 drop-shadow-lg"
+              className="
+              font-sfc-primorsa
+              text-white
+              font-light
+              leading-[0.95]
+              text-5xl
+              sm:text-6xl
+              md:text-7xl
+              lg:text-8xl
+              xl:text-[110px]
+              "
             >
-              Creating Memorable <br />
-              <span className="italic text-gold">Celebrations</span> with <br />
-              Exceptional Catering
+              AUTHENTIC
+              <br />
+
+              SOUTH INDIAN
+
+              <br />
+
+              CATERING
             </motion.h1>
 
-            {/* Supporting Description */}
             <motion.p
               variants={itemVariants}
-              className="text-white/80 font-sans font-light text-sm sm:text-base md:text-lg max-w-2xl leading-relaxed mb-10 drop-shadow-sm"
+              className="
+              mt-8
+              max-w-2xl
+              text-white/75
+              text-base
+              md:text-lg
+              
+              "
             >
-              Crafting gourmet experiences tailored to weddings, corporate events, and high-end celebrations. Every dish is a masterpiece, every service is an act of elegance.
+              Creating unforgettable culinary experiences with authentic South
+              Indian flavors, luxury presentation and impeccable hospitality
+              for weddings, receptions, corporate events and private
+              celebrations.
             </motion.p>
 
-            {/* Action Buttons (CTAs) */}
+            {/* CTA Button */}
+
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 mb-12"
+              className="mt-12 flex justify-center"
             >
-              {/* Primary CTA */}
-              <ScrollLink to="contact" smooth={true} offset={-80} duration={800} className="cursor-pointer">
+              <ScrollLink
+                to="contact"
+                smooth={true}
+                offset={-80}
+                duration={800}
+                className="cursor-pointer"
+              >
                 <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="w-full sm:w-auto px-8 py-4 bg-gold hover:bg-gold-hover text-luxury-black font-grotesk text-xs uppercase tracking-[0.25em] font-semibold transition-all duration-300 rounded-none shadow-xl"
+                  whileHover={{
+                    scale: 1.05,
+                    y: -3,
+                  }}
+                  whileTap={{
+                    scale: 0.96,
+                  }}
+                  transition={{
+                    duration: 0.3,
+                  }}
+                  className="
+                  group
+                  inline-flex
+                  items-center
+                  gap-3
+                  rounded-full
+                  bg-[#D89A42]
+                  hover:bg-[#E8AE56]
+                  px-10
+                  py-5
+                  text-sm
+                  uppercase
+                  tracking-[0.25em]
+                  font-semibold
+                  text-[#2A1608]
+                  shadow-[0_15px_40px_rgba(0,0,0,0.25)]
+                  transition-all
+                  duration-500
+                  "
                 >
-                  Book Catering
-                </motion.button>
-              </ScrollLink>
+                  CONTACT US NOW
 
-              {/* Secondary CTA */}
-              <ScrollLink to="menu" smooth={true} offset={-80} duration={800} className="cursor-pointer">
-                <motion.button
-                  whileHover={{ scale: 1.03, backgroundColor: 'rgba(255,255,255,0.1)' }}
-                  whileTap={{ scale: 0.97 }}
-                  className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/40 text-white font-grotesk text-xs uppercase tracking-[0.25em] transition-all duration-300 rounded-none hover:border-gold hover:text-gold"
-                >
-                  Explore Menu
+                  <motion.span
+                    animate={{
+                      x: [0, 4, 0],
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 1.6,
+                    }}
+                    className="text-lg"
+                  >
+                    →
+                  </motion.span>
                 </motion.button>
               </ScrollLink>
             </motion.div>
+
           </motion.div>
 
-          {/* Floating Statistics Bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.9 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8 max-w-4xl border-t border-white/15 pt-6"
-          >
-            {statItems.map((stat, idx) => (
-              <div key={idx} className="flex items-center space-x-4">
-                <span className="font-sfc-primorsa text-3xl md:text-4xl text-gold font-light tracking-wider">
-                  {stat.number}
-                </span>
-                <span className="font-grotesk text-[10px] md:text-xs tracking-[0.2em] text-white/60 uppercase leading-snug">
-                  {stat.label}
-                </span>
-              </div>
-            ))}
-          </motion.div>
-        </div>
+          {/* Floating Food Plate */}
 
-        {/* Dynamic Scroll & Progress Indicator */}
-        <ScrollIndicator
-          progress={scrollYProgress}
-          targetSection="about"
-          size={60}
-          strokeWidth={2.5}
-          colors={{
-            track: 'rgba(255, 255, 255, 0.15)',
-            progress: '#C5A85C',
-            border: 'rgba(255, 255, 255, 0.25)',
-            arrow: '#FFFFFF',
-          }}
-        />
-      </section>
-    );
-  };
+          <motion.img
+            src="/images/hero-food.webp"
+            alt="South Indian Food"
+            style={{
+              x: mousePos.x * 0.15,
+            }}
+            animate={{
+              y: [0, -12, 0],
+              rotate: [0, 2, 0],
+            }}
+            transition={{
+              duration: 7,
+              repeat: Infinity,
+            }}
+            className="
+            hidden
+            lg:block
+            absolute
+            left-1/2
+            -translate-x-1/2
+            bottom-[-140px]
+            w-[360px]
+            drop-shadow-[0_40px_50px_rgba(0,0,0,0.45)]
+            z-40
+            "
+          />
 
-  export default Hero;
+          {/* Decorative Glow */}
+
+          <div
+            className="
+            absolute
+            left-1/2
+            bottom-[-120px]
+            -translate-x-1/2
+            w-[420px]
+            h-[160px]
+            rounded-full
+            bg-[#D89A42]/20
+            blur-[100px]
+            z-20
+            "
+          />
+
+          {/* Mobile Hero Image */}
+
+          <motion.img
+            src="/images/hero-food.webp"
+            alt=""
+            animate={{
+              y: [0, -10, 0],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+            }}
+            className="
+            block
+            lg:hidden
+            mx-auto
+            mt-12
+            w-[240px]
+            drop-shadow-2xl
+            "
+          />
+
+          {/* Decorative Circles */}
+
+          <div
+            className="
+            hidden
+            lg:block
+            absolute
+            top-20
+            left-1/2
+            -translate-x-1/2
+            w-[700px]
+            h-[700px]
+            rounded-full
+            border
+            border-white/5
+            "
+          />
+
+          <div
+            className="
+            hidden
+            lg:block
+            absolute
+            top-10
+            left-1/2
+            -translate-x-1/2
+            w-[900px]
+            h-[900px]
+            rounded-full
+            border
+            border-white/5
+            "
+          />
+
+          {/* Glass Overlay */}
+
+          <div
+            className="
+            absolute
+            left-1/2
+            top-1/2
+            -translate-x-1/2
+            -translate-y-1/2
+            w-[700px]
+            h-[420px]
+            rounded-[40px]
+            bg-white/[0.02]
+            backdrop-blur-[2px]
+            border
+            border-white/5
+            -z-10
+            "
+          />
+
+        </motion.div>
+
+      </div>
+
+      {/* Scroll Progress Indicator */}
+      <ScrollIndicator
+        // progress={scrollY}
+        targetSection="about"
+        size={72}
+        strokeWidth={2.5}
+        colors={{
+          track: "rgba(255,255,255,0.15)",
+          progress: "#D89A42",
+          border: "rgba(255,255,255,0.25)",
+          arrow: "#FFFFFF",
+        }}
+      />
+    </section> 
+  );
+};
+
+export default Hero;

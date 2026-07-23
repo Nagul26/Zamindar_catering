@@ -1,18 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Lenis from 'lenis';
 import Navigation from './sections/Navigation';
 import Hero from './sections/Hero';
 import About from './sections/About';
 import WhyChooseUs from './sections/WhyChooseUs';
 import Services from './sections/Services';
-import EventTypes from './sections/EventTypes';
-import SignatureMenu from './sections/SignatureMenu';
+import VideoShow from './sections/VideoShow';
 import Gallery from './sections/Gallery';
 import Testimonials from './sections/Testimonials';
-import BookingProcess from './sections/BookingProcess';
 import ContactForm from './sections/ContactForm';
 import Footer from './sections/Footer';
 
 function App() {
+  // Initialize Lenis Smooth Inertial Scroll
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      touchMultiplier: 1.5,
+    });
+
+    let frameId;
+    function raf(time) {
+      lenis.raf(time);
+      frameId = requestAnimationFrame(raf);
+    }
+
+    frameId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <div className="relative w-full min-h-screen bg-primary-bg text-luxury-black font-sans selection:bg-gold-light selection:text-gold overflow-x-hidden">
       {/* Sticky Premium Header Navigation */}
@@ -32,26 +54,19 @@ function App() {
         {/* 4. Catering Services */}
         <Services />
 
-        {/* 5. Event Types */}
-        <EventTypes />
+        <VideoShow />
 
-        {/* 6. Signature Menu Highlights */}
-        <SignatureMenu />
-
-        {/* 7. Gallery Showcase */}
+        {/* 10. Gallery Showcase */}
         <Gallery />
 
-        {/* 8. Customer Testimonials */}
+        {/* 13. Customer Testimonials */}
         <Testimonials />
 
-        {/* 9. Booking Process Timeline */}
-        <BookingProcess />
-
-        {/* 10. Contact / Booking Form */}
+        {/* 15. Contact / Booking Form */}
         <ContactForm />
       </main>
 
-      {/* 11. Footer */}
+      {/* 16. Footer */}
       <Footer />
     </div>
   );

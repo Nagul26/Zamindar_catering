@@ -1,193 +1,179 @@
-import React, { useEffect } from 'react';
-import { motion, useTransform, useSpring, isMotionValue, useMotionValue, useScroll } from 'framer-motion';
-import { scroller } from 'react-scroll';
+import React from "react";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 
-/**
- * ScrollIndicator Component
- * 
- * Reusable luxury circular scroll indicator with real-time SVG progress animation.
- * 
- * Props:
- * @param {MotionValue | number} progress - Scroll progress value (0 to 1)
- * @param {string} targetSection - ID of the target section to scroll to on click
- * @param {number} size - Outer size/diameter of the circle in px (default: 60)
- * @param {number} strokeWidth - Thickness of the progress stroke in px (default: 2.5)
- * @param {Object} colors - Styling color object { track, progress, border, arrow }
- * @param {string} className - Additional CSS classes
- */
 const ScrollIndicator = ({
-  progress,
-  targetSection = 'about',
-  size = 60,
-  strokeWidth = 2.5,
-  colors = {
-    track: 'rgba(255, 255, 255, 0.15)',
-    progress: '#C5A85C',
-    border: 'rgba(255, 255, 255, 0.25)',
-    arrow: '#FFFFFF',
-  },
-  className = '',
+  targetSection = "about",
+  className = "",
 }) => {
-  // Fallback to global window scroll progress if progress prop is omitted
-  const { scrollYProgress: defaultWindowProgress } = useScroll();
-  const defaultProgress = useMotionValue(0);
 
-  // Sync numerical progress prop to defaultProgress safely if a raw number is passed
-  useEffect(() => {
-    if (typeof progress === 'number' && !isNaN(progress)) {
-      const clamped = Math.min(1, Math.max(0, progress));
-      defaultProgress.set(clamped);
-    }
-  }, [progress, defaultProgress]);
+  const { scrollY, scrollYProgress } = useScroll();
 
-  // Determine active MotionValue source
-  const rawProgress = isMotionValue(progress)
-    ? progress
-    : typeof progress === 'number'
-    ? defaultProgress
-    : defaultWindowProgress;
-
-  // Smooth spring physics for liquid motion
-  const smoothProgress = useSpring(rawProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 25,
+    mass: 0.5,
   });
 
-  // SVG dimensions calculation
-  const center = size / 2;
-  const radius = Math.max(0, (size - strokeWidth) / 2);
+  const size = 40;
+  const stroke = 2.5;
 
-  // Rotate arrow smoothly when reaching bottom of page (points UP to scroll back to top)
-  const arrowRotation = useTransform(rawProgress, [0, 0.85, 0.95], [0, 0, 180]);
+  const radius = (size - stroke) / 2;
+  const circumference = 2 * Math.PI * radius;
+
+  // Hide at top
+  const topOpacity = useTransform(
+    scrollY,
+    [0, 120],
+    [0, 1]
+  );
+
+  // Hide near bottom
+  const bottomOpacity = useTransform(
+    scrollYProgress,
+    [0.92, 1],
+    [1, 0]
+  );
+
+const opacity = useTransform(
+  [topOpacity, bottomOpacity],
+  (values) => values[0] * values[1]
+);
 
   const handleClick = () => {
-    // If user has scrolled near the bottom of the page, scroll back to top
-    if (rawProgress.get() > 0.85) {
+
+    if (scrollY.get() > 350) {
+
       window.scrollTo({
         top: 0,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
-      return;
-    }
 
-    if (!targetSection) return;
-    const targetElement = document.getElementById(targetSection);
-    if (targetElement) {
-      const navOffset = 80;
-      const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({
-        top: elementPosition - navOffset,
-        behavior: 'smooth',
-      });
     } else {
-      scroller.scrollTo(targetSection, {
-        duration: 800,
-        delay: 0,
-        smooth: 'easeInOutQuart',
-        offset: -80,
-      });
+
+      const element =
+        document.getElementById(targetSection);
+
+      if (element) {
+
+        element.scrollIntoView({
+          behavior: "smooth",
+        });
+
+      }
+
     }
+
   };
-
-  return (
-    <motion.div
-      className={`fixed bottom-10 right-10 z-40 hidden md:flex flex-col items-center justify-center pointer-events-auto cursor-pointer select-none ${className}`}
+    return (
+    <motion.button
       onClick={handleClick}
-      aria-label="Scroll progress indicator"
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          handleClick();
-        }
+      aria-label="Scroll"
+      style={{ opacity }}
+      initial={{
+        scale: 0.8,
       }}
+      animate={{
+        scale: 1,
+      }}
+      whileHover={{
+        scale: 1.08,
+      }}
+      whileTap={{
+        scale: 0.95,
+      }}
+      className={`
+        fixed
+        bottom-10
+        right-10
+        z-[999]
+        hidden
+        lg:flex
+        items-center
+        justify-center
+        w-[40px]
+        h-[40px]
+        rounded-full
+        bg-white
+        shadow-[0_12px_35px_rgba(0,0,0,0.18)]
+        transition-all
+        duration-300
+        overflow-hidden
+        ${className}
+      `}
     >
-      <motion.div
-        whileHover="hover"
-        className="relative flex items-center justify-center rounded-full p-2 group transition-all duration-300"
-        style={{
-          width: size + 8,
-          height: size + 8,
-        }}
-      >
-        {/* Backdrop glassmorphism circle */}
-        <div 
-          className="absolute inset-0 rounded-full backdrop-blur-md transition-all duration-500 group-hover:scale-110 shadow-2xl"
-          style={{
-            backgroundColor: 'rgba(12, 12, 12, 0.45)',
-            border: `1px solid ${colors.border || 'rgba(255, 255, 255, 0.25)'}`,
-          }}
-        />
+      {/* Progress Ring */}
+<svg
+  className="absolute inset-0 -rotate-90"
+  width={size}
+  height={size}
+>
+  <circle
+    cx={size / 2}
+    cy={size / 2}
+    r={radius}
+    fill="none"
+    stroke="#E8DDD0"
+    strokeWidth="2"
+  />
 
-        {/* SVG Circular Progress Track and Fill */}
-        <svg
-          width={size}
-          height={size}
-          viewBox={`0 0 ${size} ${size}`}
-          className="relative z-10 transform -rotate-90 pointer-events-none"
-        >
-          {/* Background Track Circle */}
-          <circle
-            cx={center}
-            cy={center}
-            r={radius}
-            fill="none"
-            stroke={colors.track || 'rgba(255, 255, 255, 0.15)'}
-            strokeWidth={strokeWidth}
-          />
+  <motion.circle
+    cx={size / 2}
+    cy={size / 2}
+    r={radius}
+    fill="none"
+    stroke="#4B2E14"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeDasharray={circumference}
+    style={{
+      strokeDashoffset: useTransform(
+        progress,
+        (value) => circumference * (1 - value)
+      ),
+    }}
+  />
+</svg>
 
-          {/* Clockwise Progress Fill Circle */}
-          <motion.circle
-            cx={center}
-            cy={center}
-            r={radius}
-            fill="none"
-            stroke={colors.progress || '#C5A85C'}
-            strokeWidth={strokeWidth}
-            strokeLinecap="round"
-            style={{
-              pathLength: smoothProgress,
-            }}
-          />
-        </svg>
+      {/* Inner Circle */}
+      {/* <div
+        className="
+          absolute
+          inset-[7px]
+          rounded-full
+          border-2
+          border-[#4B2E14]
+          bg-white
+        "
+      /> */}
 
-        {/* Centered Downward/Upward Arrow with Continuous Motion */}
-        <motion.div
-          className="absolute z-20 flex items-center justify-center text-white"
-          style={{ rotate: arrowRotation }}
-          variants={{
-            hover: { scale: 1.2, color: colors.progress || '#C5A85C' },
-          }}
-          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-        >
-          <motion.div
-            animate={{ y: [0, 4, 0] }}
-            transition={{
-              repeat: Infinity,
-              duration: 1.8,
-              ease: 'easeInOut',
-              times: [0, 0.5, 1],
-            }}
-          >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{ color: colors.arrow || '#FFFFFF' }}
-            >
-              <path d="M12 5v14M19 12l-7 7-7-7" />
-            </svg>
-          </motion.div>
-        </motion.div>
-      </motion.div>
-    </motion.div>
+      {/* Arrow */}
+ <motion.svg
+  animate={{
+    y: [0, -2, 0],
+  }}
+  transition={{
+    repeat: Infinity,
+    duration: 1.6,
+  }}
+  className="relative z-20"
+  width="14"
+  height="14"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#111"
+  strokeWidth="2.3"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+>
+  <path d="M12 18V6" />
+  <path d="M7 11L12 6L17 11" />
+</motion.svg>
+    </motion.button>
   );
 };
 

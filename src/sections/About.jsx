@@ -1,107 +1,144 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-scroll';
-import aboutImg from '../assets/about_catering.png';
+import React from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-scroll";
+
+import smallImg from "../assets/images/about-small.png";
+import largeImg from "../assets/images/about-large.png";
 
 const About = () => {
   return (
-    <section id="about" className="py-24 md:py-32 bg-primary-bg relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          
-          {/* Image Column */}
-          <div className="lg:col-span-6 relative">
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="relative z-10"
-            >
-              {/* Main Image */}
-              <div className="overflow-hidden aspect-[4/5] bg-luxury-bg shadow-2xl relative group">
-                <img 
-                  src={aboutImg} 
-                  alt="Fine dining catering close-up" 
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                />
-                {/* Overlay filter */}
-                <div className="absolute inset-0 bg-gold/5 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0" />
-              </div>
-              
-              {/* Decorative Frame */}
-              <div className="absolute -top-6 -left-6 w-1/3 h-1/3 border-t-2 border-l-2 border-gold -z-10" />
-              <div className="absolute -bottom-6 -right-6 w-1/3 h-1/3 border-b-2 border-r-2 border-gold -z-10" />
-            </motion.div>
-            
-            {/* Elegant text label floating behind/beside the frame */}
-            <div className="absolute -right-12 bottom-20 select-none pointer-events-none hidden xl:block">
-              <span className="font-sfc-primorsa text-9xl text-gold/10 font-bold tracking-wider leading-none">
-                Est. 2011
-              </span>
-            </div>
-          </div>
-          
-          {/* Content Column */}
-          <div className="lg:col-span-6 flex flex-col justify-center">
-            <motion.span 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-gold font-grotesk uppercase tracking-[0.25em] text-xs font-semibold mb-3 block"
-            >
-              Our Heritage
-            </motion.span>
-            
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-luxury-black font-sans font-light tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight"
-            >
-              Crafting Curated Gastronomy for Royal Affairs
-            </motion.h2>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="font-sans font-light text-luxury-gray text-base leading-relaxed space-y-6"
-            >
-              <p>
-                For over a decade, Zamindar Catering has redefined the dining landscape for weddings, grand events, and intimate celebrations. Our brand represents a union of traditional heritage recipes and modern, high-end culinary arts, resulting in experiences that transcend the simple act of eating.
-              </p>
-              <p>
-                We believe that every gathering is unique, requiring a custom culinary voice. Our team of world-class chefs, professional servers, and detail-oriented designers curate every detail of your menu and display to match the scale, elegance, and energy of your vision.
-              </p>
-              <p className="border-l border-gold pl-4 italic text-luxury-black font-sfc-primorsa text-sm">
-                "We do not simply serve food; we design memories that live in the memory of your guests for decades to come."
-              </p>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-8"
-            >
-              <Link to="contact" smooth={true} offset={-80} duration={800} className="cursor-pointer">
-                <motion.button
-                  whileHover={{ scale: 1.05, color: '#C5A85C' }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-3 bg-luxury-black text-white hover:bg-transparent border border-luxury-black hover:border-gold font-grotesk text-xs uppercase tracking-[0.2em] transition-all duration-300 rounded-none shadow-md"
-                >
-                  Read More
-                </motion.button>
-              </Link>
-            </motion.div>
-          </div>
-          
+    <section
+      id="about"
+      className="relative bg-primary-bg py-8 md:py-12 lg:py-16 overflow-hidden"
+    >
+      <div className="max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12">
+
+        {/* Heading */}
+
+        <div className="text-center mb-14 md:mb-24">
+
+          <span className="uppercase tracking-[0.3em] text-[11px] md:text-[13px] text-[#4b2e18] font-semibold">
+            ✦ WHO WE ARE
+          </span>
+
+          <h2 className="font-sfc-primorsa font-light text-[#432615] leading-[0.95]
+                         text-[44px]
+                         sm:text-[60px]
+                         md:text-[72px]
+                         lg:text-[92px]
+                         mt-4">
+            PROFESSIONAL
+            <br />
+            CATERING TEAMS
+            <br />
+            IN ZAMINDAR
+          </h2>
+
         </div>
+
+        {/* Content */}
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-x-16 items-center">
+
+          {/* Left */}
+
+          <div className="lg:col-span-3 flex flex-col items-center lg:items-start">
+
+            <div className="w-full max-w-[300px] h-[200px] rounded-3xl overflow-hidden shadow-lg">
+              <img
+                src={smallImg}
+                alt="About"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            <h3 className="font-sfc-primorsa text-[#432615]
+                           text-[70px]
+                           sm:text-[80px]
+                           lg:text-[96px]
+                           leading-none mt-8">
+              4.9K
+              <span className="text-3xl sm:text-4xl lg:text-5xl align-top">
+                +
+              </span>
+            </h3>
+
+            <p className="text-[#432615] text-lg sm:text-xl mt-2">
+              events each year
+            </p>
+
+          </div>
+
+          {/* Center */}
+
+          <div className="lg:col-span-5 text-center lg:text-left">
+
+            <h3
+              className="font-sfc-primorsa text-[#432615]
+              text-[28px]
+              sm:text-[34px]
+              lg:text-[30px]
+              leading-[1.25]"
+            >
+              EVERY EVENT IS A UNIQUE OPPORTUNITY TO CRAFT A
+              CULINARY EXPERIENCE AS EXTRAORDINARY AS DELICIOUS.
+            </h3>
+
+            <p
+              className="mt-6 text-[#6f655d]
+              text-base
+              sm:text-lg
+              leading-8"
+            >
+              A meeting or celebration is a unique and unforgettable event!
+              Zamindar Catering brings together creative planning, authentic
+              South Indian cuisine, elegant presentation, and exceptional
+              hospitality to create memorable celebrations.
+            </p>
+
+            <Link
+              to="contact"
+              smooth
+              offset={-80}
+              duration={800}
+            >
+              <button
+                className="mt-8 md:mt-10 px-8 md:px-10 py-4 rounded-full
+                bg-[#4a2d16] text-white uppercase tracking-widest
+                text-xs md:text-sm hover:bg-[#5f3d20] transition"
+              >
+                LEARN ABOUT US →
+              </button>
+            </Link>
+
+          </div>
+
+          {/* Right */}
+
+          <div className="lg:col-span-4 flex justify-center lg:justify-end">
+
+            <div
+              className="w-full
+              max-w-[420px]
+              h-[450px]
+              sm:h-[550px]
+              lg:w-[470px]
+              lg:h-[650px]
+              rounded-[28px]
+              overflow-hidden
+              shadow-xl"
+            >
+              <img
+                src={largeImg}
+                alt="Luxury Catering"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
     </section>
   );

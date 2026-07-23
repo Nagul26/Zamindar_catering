@@ -1,54 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@300;400;700;900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
 @import "tailwindcss";
 
 @theme {
   /* Font Family Definitions mapped to imported Google Fonts */
-  --font-sfc-primorsa: "SFC Primorsa", serif;
-  --font-sans: "Plus Jakarta Sans", sans-serif;
-  --font-grotesk: "Space Grotesk", sans-serif;
+  --font-koh: "Koh Santepheap", serif;
+  --font-roboto: "Roboto Flex", sans-serif;
+  
+  --font-sans: "Roboto Flex", sans-serif;
+  --font-grotesk: "Roboto Flex", sans-serif;
+  --font-sfc-primorsa: "Koh Santepheap", serif;
 
   /* Custom Color System */
-  --color-gold: #C5A85C;
-  --color-gold-hover: #A3843C;
-  --color-gold-light: #F5EEE3;
-  --color-warm-brown: #593E30;
-  --color-warm-brown-dark: #3F2C22;
-  --color-luxury-black: #0C0C0C;
-  --color-luxury-gray: #555555;
-  --color-luxury-bg: #F3EBDD;
+  --color-gold: #C8A96A;
+  --color-gold-hover: #B29456;
+  --color-gold-light: #FAF6EE;
+  --color-warm-brown: #5A3E2B;
+  --color-warm-brown-dark: #23160D;
+  --color-luxury-black: #1F1F1F;
+  --color-luxury-gray: #6B6B6B;
+  --color-luxury-bg: #F5F0E8;
+  --color-luxury-ivory: #F5F0E8;
+  --color-luxury-gold: #C8A96A;
 
   /* Luxury Warm Neutral Background Palette */
-  --color-primary-bg: #F8F4EC;
-  --color-secondary-bg: #F3EBDD;
-  --color-section-alt: #EFE5D4;
-  --color-card-bg: #FCFAF6;
+  --color-primary-bg: #F5F0E8;
+  --color-secondary-bg: #F5F0E8;
+  --color-section-alt: #EAE3D6;
+  --color-card-bg: #FFFFFF;
+  --color-border-light: rgba(0,0,0,0.08);
   
   --animate-spin-slow: spin 20s linear infinite;
 }
 
 /* Custom Base Styles for Premium feel */
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-roboto);
   background-color: var(--color-primary-bg);
   color: var(--color-luxury-black);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-h1 {
-  font-family: var(--font-sfc-primorsa);
+h1, h2, h3, .section-title, .hero-title, .luxury-headline {
+  font-family: var(--font-koh) !important;
 }
 
-h2 {
-  font-family: var(--font-sans);
-}
-
-h3 {
-  font-family: var(--font-grotesk);
+p, span, button, input, textarea, select, label, footer, .font-body {
+  font-family: var(--font-roboto);
 }
 
 button {
-  font-family: var(--font-grotesk);
+  font-family: var(--font-roboto);
 }
 
 /* Glassmorphism scrollbar */
@@ -56,14 +58,14 @@ button {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F8F4EC;
+  background: #F5F0E8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C5A85C;
+  background: #C8A96A;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #A3843C;
+  background: #B29456;
 }
 
 /* Hide default horizontal scroll */

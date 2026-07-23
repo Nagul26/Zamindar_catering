@@ -3,6 +3,8 @@ import Lenis from 'lenis';
 import Navigation from './sections/Navigation';
 import Hero from './sections/Hero';
 import About from './sections/About';
+import EventsWeCater from './sections/EventsWeCater';
+// import StickyCards from './components/StickyCards/StickyCards'
 import WhyChooseUs from './sections/WhyChooseUs';
 import Services from './sections/Services';
 import VideoShow from './sections/VideoShow';
@@ -47,6 +49,11 @@ function App() {
 
         {/* 2. About Zamindar Catering */}
         <About />
+
+        {/* Events We Cater Section */}
+        <EventsWeCater />
+
+        {/* <StickyCards /> */}
 
         {/* 3. Why Choose Us */}
         <WhyChooseUs />

@@ -11,6 +11,7 @@ import VideoShow from './sections/VideoShow';
 import Gallery from './sections/Gallery';
 import Testimonials from './sections/Testimonials';
 import ContactForm from './sections/ContactForm';
+import CateringCTA from './sections/CateringCTA';
 import Footer from './sections/Footer';
 
 function App() {
@@ -71,6 +72,9 @@ function App() {
 
         {/* 15. Contact / Booking Form */}
         <ContactForm />
+
+        {/* 15b. Call-To-Action (Unforgettable Catering) */}
+        <CateringCTA />
       </main>
 
       {/* 16. Footer */}

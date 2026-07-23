@@ -77,7 +77,7 @@ const Gallery = () => {
     <section id="gallery" className="py-24 md:py-32 bg-secondary-bg relative">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <SectionHeader
-          subtitle="Our Portfolio"
+          subtitle=" ✦ Our Portfolio"
           title="The Gallery Showcase"
           description="Visual evidence of our attention to detail, presentation craftsmanship, and successful banquets from recent high-profile events."
           align="center"

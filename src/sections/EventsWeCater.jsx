@@ -5,25 +5,25 @@ const events = [
   {
     title: "CORPORATE",
     description: "Professional Elementor adjustment with better compatibility, higher stability, and improved visual consistency.",
-    bgImage: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1600&q=80",
+    bgImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80",
     circleImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80",
   },
   {
     title: "WEDDINGS",
     description: "Exquisite culinary creations, seamless service, and elegant presentation customized to make your special day truly magical.",
-    bgImage: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=80",
+    bgImage: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=600&q=80",
     circleImage: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=600&q=80",
   },
   {
     title: "SOCIAL EVENTS",
     description: "From birthdays to family gatherings, we bring together delicious food, impeccable style, and warm hospitality for your loved ones.",
-    bgImage: "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&w=1600&q=80",
+    bgImage: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=600&q=80",
     circleImage: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=600&q=80",
   },
   {
     title: "PRIVATE DINING",
     description: "Curated bespoke dining experiences, intimate chef tables, and custom-tailored menus for exclusive gatherings.",
-    bgImage: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80",
+    bgImage: "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=600&q=80",
     circleImage: "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=600&q=80",
   }
 ];
@@ -85,7 +85,7 @@ const EventsWeCater = () => {
           <div className="relative z-20 w-full max-w-[480px] px-8 flex flex-col items-center justify-center">
             {/* Glassmorphic Card */}
             <div className="w-full h-[500px] md:h-[550px] rounded-[36px] bg-gradient-to-b from-[#8C7A6B]/25 to-[#4E3F35]/55 backdrop-blur-xl border border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] px-6 py-10 flex flex-col items-center justify-between relative overflow-hidden">
-              
+
               {/* Card Inner Content */}
               <div className="w-full flex-1 flex flex-col items-center justify-center text-center">
                 {/* Circular image wrapper */}
@@ -114,9 +114,8 @@ const EventsWeCater = () => {
                   <button
                     key={dotIndex}
                     onClick={() => handleDotClick(dotIndex)}
-                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                      dotIndex === index ? "w-6 bg-white" : "w-2 bg-white/30 hover:bg-white/50"
-                    }`}
+                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${dotIndex === index ? "w-6 bg-white" : "w-2 bg-white/30 hover:bg-white/50"
+                      }`}
                     aria-label={`Go to slide ${dotIndex + 1}`}
                   />
                 ))}

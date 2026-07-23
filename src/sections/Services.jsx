@@ -103,15 +103,15 @@ const Services = () => {
 
           <div className="flex justify-center items-center gap-3 mb-6">
 
-            <span className="w-2 h-2 rounded-full bg-[#9C6B30]" />
+            
 
             <p className="uppercase tracking-[0.45em] text-xs font-medium text-[#8A6C49]">
 
-              CATERING MENUS
+             ✦ CATERING MENUS
 
             </p>
 
-            <span className="w-2 h-2 rounded-full bg-[#9C6B30]" />
+           
 
           </div>
 

@@ -21,7 +21,7 @@ const WhyChooseUs = () => {
             transition={{ duration: 0.8 }}
             className="flex flex-col"
           >
-            <p className="uppercase tracking-[3px] text-xs sm:text-sm font-semibold text-warm-brown mb-6">
+            <p className="uppercase tracking-[0.3em] text-[11px] md:text-[13px] justify-center text-[#4b2e18] font-semibold mb-6">
               ✦ WHY CHOOSE US
             </p>
 

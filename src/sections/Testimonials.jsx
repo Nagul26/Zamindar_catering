@@ -74,7 +74,7 @@ const Testimonials = () => {
 
       <div className="max-w-5xl mx-auto px-6 md:px-12 relative z-10">
         <SectionHeader
-          subtitle="Client Praise"
+          subtitle=" ✦ Client Praise"
           title="Customer Testimonials"
           description="We take pride in our service. Read about the catering experiences from our esteemed hosts and event organizers."
           align="center"

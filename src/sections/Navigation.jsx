@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
-import logo from "../assets/Zamindar_Catering.png";
+import logo from "../assets/images/Zamindar_Catering.png";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);

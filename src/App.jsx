@@ -1,20 +1,14 @@
 import React, { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 import Navigation from './sections/Navigation';
-import Hero from './sections/Hero';
-import About from './sections/About';
-import EventsWeCater from './sections/EventsWeCater';
-import WhyChooseUs from './sections/WhyChooseUs';
-import Services from './sections/Services';
-import VideoShow from './sections/VideoShow';
-import MeetTeam from './sections/MeetTeam';
-import Gallery from './sections/Gallery';
-// import Testimonials from './sections/Testimonials';
-import ContactForm from './sections/ContactForm';
-import CateringCTA from './sections/CateringCTA';
+import Home from './pages/Home';
+import Menu from './pages/Menu';
 import Footer from './sections/Footer';
 
 function App() {
+  const { pathname } = useLocation();
+
   // Initialize Lenis Smooth Inertial Scroll
   useEffect(() => {
     const lenis = new Lenis({
@@ -32,11 +26,14 @@ function App() {
 
     frameId = requestAnimationFrame(raf);
 
+    // Reset scroll to top on route change
+    window.scrollTo(0, 0);
+
     return () => {
       cancelAnimationFrame(frameId);
       lenis.destroy();
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <div className="relative w-full min-h-screen bg-primary-bg text-luxury-black font-sans selection:bg-gold-light selection:text-gold overflow-x-hidden">
@@ -45,37 +42,10 @@ function App() {
 
       {/* Main Single Page Sections */}
       <main>
-        {/* 1. Hero Section */}
-        <Hero />
-
-        {/* 2. About Zamindar Catering */}
-        <About />
-
-        {/* Events We Cater Section */}
-        <EventsWeCater />
-
-        {/* 3. Why Choose Us */}
-        <WhyChooseUs />
-
-        {/* 4. Catering Services */}
-        <Services />
-
-        <VideoShow />
-
-        {/* Meet the Team Showcase */}
-        <MeetTeam />
-
-        {/* 10. Gallery Showcase */}
-        <Gallery />
-
-        {/* 13. Customer Testimonials */}
-        {/* <Testimonials /> */}
-
-        {/* 15. Contact / Booking Form */}
-        <ContactForm />
-
-        {/* 15b. Call-To-Action (Unforgettable Catering) */}
-        <CateringCTA />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<Menu />} />
+        </Routes>
       </main>
 
       {/* 16. Footer */}

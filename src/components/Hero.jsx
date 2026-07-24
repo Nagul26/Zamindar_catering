@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link as ScrollLink } from "react-scroll";
+import { Link as RouterLink } from "react-router-dom";
 import HeroVideo from "./HeroVideo";
 import left from "../assets/images/hero-left.png";
 import right from "../assets/images/hero-right.png";
@@ -271,11 +272,8 @@ const Hero = () => {
               variants={itemVariants}
               className="mt-8 md:mt-12 flex justify-center"
             >
-              <ScrollLink
-                to="contact"
-                smooth={true}
-                offset={-80}
-                duration={800}
+              <RouterLink
+                to="/menu"
                 className="cursor-pointer"
               >
                 <motion.button
@@ -309,7 +307,7 @@ const Hero = () => {
                   duration-500
                   "
                 >
-                  CONTACT US NOW
+                  EXPLORE MENU
 
                   <motion.span
                     animate={{
@@ -324,7 +322,7 @@ const Hero = () => {
                     →
                   </motion.span>
                 </motion.button>
-              </ScrollLink>
+              </RouterLink>
             </motion.div>
 
           </motion.div>

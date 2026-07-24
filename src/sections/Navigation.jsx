@@ -1,12 +1,109 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-scroll';
+import { Link as ScrollLink } from 'react-scroll';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import logo from "../assets/images/Zamindar_Catering.png";
 
+// Page-aware Navigation Link component
+const NavigationLink = ({ link, onClick, className, activeClass, children }) => {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
+  if (link.target === 'menu') {
+    const isMenuActive = location.pathname === '/menu';
+    return (
+      <RouterLink
+        to="/menu"
+        onClick={onClick}
+        className={`${className} ${isMenuActive ? 'text-gold font-semibold' : ''}`}
+      >
+        {children}
+        {isMenuActive && (
+          <span className="absolute bottom-1.5 left-0 w-full h-[1.5px] bg-gold scale-x-100" />
+        )}
+      </RouterLink>
+    );
+  }
+
+  if (isHomePage) {
+    return (
+      <ScrollLink
+        to={link.target}
+        spy={true}
+        smooth={true}
+        offset={-80}
+        duration={800}
+        activeClass={activeClass}
+        onClick={onClick}
+        className={className}
+      >
+        {children}
+      </ScrollLink>
+    );
+  }
+
+  return (
+    <RouterLink
+      to={`/#${link.target}`}
+      onClick={onClick}
+      className={className}
+    >
+      {children}
+    </RouterLink>
+  );
+};
+
+// Page-aware Book Now Button component
+const BookNowButton = ({ onClick, isMobile = false }) => {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
+  const buttonContent = (
+    <motion.button
+      whileHover={{ scale: 1.03, y: isMobile ? -2 : 0 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className={
+        isMobile
+          ? "w-full py-4 bg-warm-brown text-white hover:bg-gold hover:text-luxury-black border border-warm-brown hover:border-gold font-sans text-xs uppercase tracking-[0.25em] transition-all duration-300 rounded-full shadow-sm"
+          : "px-5 py-2 bg-warm-brown text-white hover:bg-gold hover:text-luxury-black border border-warm-brown hover:border-gold font-sans text-xs uppercase tracking-[0.2em] transition-all duration-300 rounded-full shadow-sm"
+      }
+    >
+      Book Now
+    </motion.button>
+  );
+
+  if (isHomePage) {
+    return (
+      <ScrollLink
+        to="contact"
+        smooth={true}
+        offset={-80}
+        duration={800}
+        onClick={onClick}
+        className="cursor-pointer inline-block w-full text-center"
+      >
+        {buttonContent}
+      </ScrollLink>
+    );
+  }
+
+  return (
+    <RouterLink
+      to="/#contact"
+      onClick={onClick}
+      className="cursor-pointer inline-block w-full text-center"
+    >
+      {buttonContent}
+    </RouterLink>
+  );
+};
+
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,9 +135,13 @@ const Navigation = () => {
     { name: 'Gallery', target: 'gallery' },
   ];
 
-  const rightLinks = [
-   
-  ];
+  const rightLinks = [];
+
+  const handleLogoClick = () => {
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
@@ -62,18 +163,14 @@ const Navigation = () => {
               <ul className="flex items-center space-x-10">
                 {leftLinks.map((link) => (
                   <li key={link.target}>
-                    <Link
-                      to={link.target}
-                      spy={true}
-                      smooth={true}
-                      offset={-80}
-                      duration={800}
+                    <NavigationLink
+                      link={link}
                       activeClass="!text-gold font-semibold"
                       className="font-sans text-xs uppercase tracking-[0.2em] text-luxury-black hover:text-gold transition-colors duration-300 cursor-pointer py-2 block relative group"
                     >
                       <span className="relative z-10">{link.name}</span>
                       <span className="absolute bottom-1.5 left-0 w-full h-[1.5px] bg-gold scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out" />
-                    </Link>
+                    </NavigationLink>
                   </li>
                 ))}
               </ul>
@@ -81,20 +178,36 @@ const Navigation = () => {
 
             {/* Center Logo */}
             <div className="flex-shrink-0 flex justify-center mx-8">
-              <Link
-                to="home"
-                smooth={true}
-                duration={800}
-                className="cursor-pointer flex flex-col items-center"
-              >
-                <motion.img
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                  src={logo}
-                  alt="Zamindar Catering"
-                  className="h-16 sm:h-18 lg:h-22 w-auto object-contain rounded-md"
-                />
-              </Link>
+              {location.pathname === '/' ? (
+                <ScrollLink
+                  to="home"
+                  smooth={true}
+                  duration={800}
+                  onClick={handleLogoClick}
+                  className="cursor-pointer flex flex-col items-center"
+                >
+                  <motion.img
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                    src={logo}
+                    alt="Zamindar Catering"
+                    className="h-16 sm:h-18 lg:h-22 w-auto object-contain rounded-md"
+                  />
+                </ScrollLink>
+              ) : (
+                <RouterLink
+                  to="/"
+                  className="cursor-pointer flex flex-col items-center"
+                >
+                  <motion.img
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                    src={logo}
+                    alt="Zamindar Catering"
+                    className="h-16 sm:h-18 lg:h-22 w-auto object-contain rounded-md"
+                  />
+                </RouterLink>
+              )}
             </div>
 
             {/* Right Links & Button */}
@@ -102,55 +215,53 @@ const Navigation = () => {
               <ul className="flex items-center space-x-10">
                 {rightLinks.map((link) => (
                   <li key={link.target}>
-                    <Link
-                      to={link.target}
-                      spy={true}
-                      smooth={true}
-                      offset={-80}
-                      duration={800}
+                    <NavigationLink
+                      link={link}
                       activeClass="!text-gold font-semibold"
                       className="font-sans text-xs uppercase tracking-[0.2em] text-luxury-black hover:text-gold transition-colors duration-300 cursor-pointer py-2 block relative group"
                     >
                       <span className="relative z-10">{link.name}</span>
                       <span className="absolute bottom-1.5 left-0 w-full h-[1.5px] bg-gold scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out" />
-                    </Link>
+                    </NavigationLink>
                   </li>
                 ))}
               </ul>
 
-              <Link
-                to="contact"
-                smooth={true}
-                offset={-80}
-                duration={800}
-                className="cursor-pointer"
-              >
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="px-5 py-2 bg-warm-brown text-white hover:bg-gold hover:text-luxury-black border border-warm-brown hover:border-gold font-sans text-xs uppercase tracking-[0.2em] transition-all duration-300 rounded-full shadow-sm"
-                >
-                  Book Now
-                </motion.button>
-              </Link>
+              <div className="w-[140px]">
+                <BookNowButton />
+              </div>
             </div>
           </div>
 
           {/* Mobile Navigation Layout */}
           <div className="flex lg:hidden items-center justify-between w-full">
             {/* Logo on Left */}
-            <Link
-              to="home"
-              smooth={true}
-              duration={800}
-              className="cursor-pointer flex flex-col items-start"
-            >
-              <img
-                src={logo}
-                alt="Zamindar Catering"
-                className="h-18 w-auto object-contain rounded-md"
-              />
-            </Link>
+            {location.pathname === '/' ? (
+              <ScrollLink
+                to="home"
+                smooth={true}
+                duration={800}
+                onClick={handleLogoClick}
+                className="cursor-pointer flex flex-col items-start"
+              >
+                <img
+                  src={logo}
+                  alt="Zamindar Catering"
+                  className="h-18 w-auto object-contain rounded-md"
+                />
+              </ScrollLink>
+            ) : (
+              <RouterLink
+                to="/"
+                className="cursor-pointer flex flex-col items-start"
+              >
+                <img
+                  src={logo}
+                  alt="Zamindar Catering"
+                  className="h-18 w-auto object-contain rounded-md"
+                />
+              </RouterLink>
+            )}
 
             {/* Hamburger Button on Right */}
             <button
@@ -186,15 +297,11 @@ const Navigation = () => {
             <ul className="flex flex-col space-y-6 text-center mb-10">
               {navLinks.map((link) => (
                 <li key={link.target}>
-                  <Link
-                    to={link.target}
-                    spy={true}
-                    smooth={true}
-                    offset={-80}
-                    duration={800}
+                  <NavigationLink
+                    link={link}
                     onClick={() => setIsMobileMenuOpen(false)}
                     activeClass="!text-gold font-semibold"
-                    className="font-sans text-lg uppercase tracking-[0.2em] text-luxury-black hover:text-gold transition-colors duration-300 cursor-pointer block py-2"
+                    className="font-sans text-lg uppercase tracking-[0.2em] text-luxury-black hover:text-gold transition-colors duration-300 cursor-pointer block py-2 relative"
                   >
                     <motion.span
                       whileHover={{ y: -2 }}
@@ -203,29 +310,15 @@ const Navigation = () => {
                     >
                       {link.name}
                     </motion.span>
-                  </Link>
+                  </NavigationLink>
                 </li>
               ))}
             </ul>
 
             <div className="flex justify-center">
-              <Link
-                to="contact"
-                smooth={true}
-                offset={-80}
-                duration={800}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full max-w-xs"
-              >
-                <motion.button
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="w-full py-4 bg-warm-brown text-white hover:bg-gold hover:text-luxury-black border border-warm-brown hover:border-gold font-sans text-xs uppercase tracking-[0.25em] transition-all duration-300 rounded-full shadow-sm"
-                >
-                  Book Now
-                </motion.button>
-              </Link>
+              <div className="w-full max-w-xs">
+                <BookNowButton onClick={() => setIsMobileMenuOpen(false)} isMobile={true} />
+              </div>
             </div>
           </motion.div>
         )}

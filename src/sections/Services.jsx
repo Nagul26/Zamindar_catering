@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-scroll";
+import { Link as RouterLink } from "react-router-dom";
 
 const Services = () => {
   const services = [
@@ -257,11 +257,8 @@ const Services = () => {
 
           </p>
 
-          <Link
-            to="contact"
-            smooth={true}
-            duration={700}
-            offset={-80}
+          <RouterLink
+            to="/menu"
           >
 
             <motion.button
@@ -287,7 +284,7 @@ const Services = () => {
 
             </motion.button>
 
-          </Link>
+          </RouterLink>
 
         </motion.div>
 

@@ -24,7 +24,7 @@ export default function ContactLuxury() {
               relative
               h-[400px]
               sm:h-[500px]
-              lg:h-[700px]
+              lg:h-[900px]
               w-full
               rounded-[24px]
               overflow-hidden

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-scroll';
 import { FaInstagram, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
-import Logo from '../assets/images/zamindar_Catering.png'
+import Logo from '../assets/images/Zamindar_Catering.png'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

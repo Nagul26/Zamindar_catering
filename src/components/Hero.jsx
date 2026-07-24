@@ -57,7 +57,7 @@ const Hero = () => {
       ref={heroRef}
       id="home"
       onMouseMove={handleMouseMove}
-      className="relative h-[1000px] overflow-hidden bg-black"
+      className="relative min-h-screen lg:h-[950px] xl:h-[1000px] overflow-hidden bg-black flex items-center justify-center"
     >
       {/* Video */}
 
@@ -79,13 +79,13 @@ const Hero = () => {
 
       {/* Main Content */}
 
-      <div className="relative z-30 flex items-center justify-center min-h-screen px-6">
+      <div className="relative z-30 flex items-center justify-center min-h-screen lg:min-h-0 lg:h-full w-full px-6 py-24 md:py-32 lg:py-0">
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="show"
-          className="relative w-full max-w-7xl mx-auto"
+          className="relative w-full max-w-7xl mx-auto flex flex-col justify-center"
         >
 
           {/* LEFT IMAGE */}
@@ -162,9 +162,28 @@ const Hero = () => {
             text-center
             max-w-5xl
             mx-auto
-            py-40
+            py-16 md:py-32 lg:py-40
+            px-4 sm:px-8 lg:px-0
             "
           >
+            {/* Glass Overlay */}
+
+            <div
+              className="
+              absolute
+              inset-0
+              m-auto
+              w-full max-w-[92%] sm:max-w-[550px] md:max-w-[700px]
+              h-[360px] sm:h-[400px] md:h-[420px]
+              rounded-[28px] md:rounded-[40px]
+              bg-white/[0.02]
+              backdrop-blur-[2px]
+              border
+              border-white/5
+              -z-10
+              "
+            />
+
             <motion.span
               variants={itemVariants}
               className="
@@ -187,7 +206,7 @@ const Hero = () => {
               text-white
               font-light
               leading-[0.95]
-              text-5xl
+              text-4xl
               sm:text-6xl
               md:text-7xl
               lg:text-8xl
@@ -207,12 +226,11 @@ const Hero = () => {
             <motion.p
               variants={itemVariants}
               className="
-              mt-8
+              mt-6 md:mt-8
               max-w-2xl
               text-white/75
-              text-base
-              md:text-lg
-              
+              text-sm sm:text-base md:text-lg
+              px-2 sm:px-0
               "
             >
               Creating unforgettable culinary experiences with authentic South
@@ -225,7 +243,7 @@ const Hero = () => {
 
             <motion.div
               variants={itemVariants}
-              className="mt-12 flex justify-center"
+              className="mt-8 md:mt-12 flex justify-center"
             >
               <ScrollLink
                 to="contact"
@@ -253,9 +271,9 @@ const Hero = () => {
                   rounded-full
                   bg-[#D89A42]
                   hover:bg-[#E8AE56]
-                  px-10
-                  py-5
-                  text-sm
+                  px-8 sm:px-10
+                  py-4 sm:py-5
+                  text-xs sm:text-sm
                   uppercase
                   tracking-[0.25em]
                   font-semibold
@@ -284,36 +302,7 @@ const Hero = () => {
             </motion.div>
 
           </motion.div>
-
-          {/* Floating Food Plate */}
-
-          <motion.img
-            src="/images/hero-food.webp"
-            alt="South Indian Food"
-            style={{
-              x: mousePos.x * 0.15,
-            }}
-            animate={{
-              y: [0, -12, 0],
-              rotate: [0, 2, 0],
-            }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-            }}
-            className="
-            hidden
-            lg:block
-            absolute
-            left-1/2
-            -translate-x-1/2
-            bottom-[-140px]
-            w-[360px]
-            drop-shadow-[0_40px_50px_rgba(0,0,0,0.45)]
-            z-40
-            "
-          />
-
+         
           {/* Decorative Glow */}
 
           <div
@@ -328,28 +317,6 @@ const Hero = () => {
             bg-[#D89A42]/20
             blur-[100px]
             z-20
-            "
-          />
-
-          {/* Mobile Hero Image */}
-
-          <motion.img
-            src="/images/hero-food.webp"
-            alt=""
-            animate={{
-              y: [0, -10, 0],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-            }}
-            className="
-            block
-            lg:hidden
-            mx-auto
-            mt-12
-            w-[240px]
-            drop-shadow-2xl
             "
           />
 
@@ -384,26 +351,6 @@ const Hero = () => {
             rounded-full
             border
             border-white/5
-            "
-          />
-
-          {/* Glass Overlay */}
-
-          <div
-            className="
-            absolute
-            left-1/2
-            top-1/2
-            -translate-x-1/2
-            -translate-y-1/2
-            w-[700px]
-            h-[420px]
-            rounded-[40px]
-            bg-white/[0.02]
-            backdrop-blur-[2px]
-            border
-            border-white/5
-            -z-10
             "
           />
 

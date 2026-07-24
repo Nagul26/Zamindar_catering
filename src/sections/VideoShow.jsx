@@ -1,4 +1,4 @@
-    import React, { useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaPlay, FaTimes } from "react-icons/fa";
 
@@ -11,14 +11,10 @@ const VideoShow = () => {
   return (
     <>
       <section className="relative w-full h-[80vh] overflow-hidden bg-black">
-        {/* Background Image */}
-        <motion.img
-          src={previewImage}
-          alt="Video Preview"
-          initial={{ scale: 1.1 }}
-          whileInView={{ scale: 1 }}
-          transition={{ duration: 1.5 }}
-          className="absolute inset-0 w-full h-full object-cover scale-110 blur-[1px]"
+        {/* Background Image (Fixed parallax scrolling effect) */}
+        <div
+          style={{ backgroundImage: `url(${previewImage})` }}
+          className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat bg-fixed opacity-75 blur-[1px]"
         />
 
         {/* Overlay */}
@@ -27,17 +23,17 @@ const VideoShow = () => {
         {/* Huge Transparent Overlay Text */}
         {/* Moving Background Text */}
         <div className="absolute top-6 left-0 w-full overflow-hidden pointer-events-none z-0">
-        <motion.div
+          <motion.div
             animate={{ x: ["0%", "-50%"] }}
             transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear",
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear",
             }}
             className="flex whitespace-nowrap"
-        >
+          >
             {[...Array(4)].map((_, index) => (
-            <h1
+              <h1
                 key={index}
                 className="
                 mx-10
@@ -52,77 +48,77 @@ const VideoShow = () => {
                 select-none
                 whitespace-nowrap
                 "
-            >
-                ZAMINDAR  CATERING 
-            </h1>
+              >
+                ZAMINDAR  CATERING
+              </h1>
             ))}
-        </motion.div>
+          </motion.div>
         </div>
         {/* Center Content */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full">
-        <div className="relative flex items-center justify-center">
+          <div className="relative flex items-center justify-center">
 
-  {/* Rotating Text Circle */}
-  <motion.svg
-    className="absolute w-44 h-44 font-[100px]"
-    viewBox="0 0 200 200"
-    animate={{ rotate: 360 }}
-    transition={{
-      duration: 18,
-      repeat: Infinity,
-      ease: "linear",
-    }}
-  >
-    {/* White Ring */}
-    <circle
-      cx="100"
-      cy="100"
-      r="70"
-      fill="none"
-      stroke="white"
-      strokeWidth="22"
-    />
+            {/* Rotating Text Circle */}
+            <motion.svg
+              className="absolute w-44 h-44 font-[100px]"
+              viewBox="0 0 200 200"
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 18,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            >
+              {/* White Ring */}
+              <circle
+                cx="100"
+                cy="100"
+                r="70"
+                fill="none"
+                stroke="white"
+                strokeWidth="22"
+              />
 
-    <defs>
- <path
-  id="circlePath"
-  d="
+              <defs>
+                <path
+                  id="circlePath"
+                  d="
     M100,100
     m-70,0
     a70,70 0 1,1 140,0
     a70,70 0 1,1 -140,0
   "
-/>
-    </defs>
+                />
+              </defs>
 
-    {/* Black Text on White Ring */}
-    <text
-      fill="#000"
-      fontSize="12"
-      fontWeight="700"
-      letterSpacing="5"
-    >
-      <textPath
-        href="#circlePath"
-        startOffset="0%"
-      >
-         CATERING & EVENT - CATERING & EVENT -
-      </textPath>
-    </text>
-  </motion.svg>
+              {/* Black Text on White Ring */}
+              <text
+                fill="#000"
+                fontSize="12"
+                fontWeight="700"
+                letterSpacing="5"
+              >
+                <textPath
+                  href="#circlePath"
+                  startOffset="0%"
+                >
+                  CATERING & EVENT - CATERING & EVENT -
+                </textPath>
+              </text>
+            </motion.svg>
 
 
-  {/* Play Button */}
-<motion.button
-  whileHover={{ scale: 1.08 }}
-  whileTap={{ scale: 0.95 }}
-  onClick={() => setOpen(true)}
-  className="relative z-10 w-24 h-24 rounded-full flex items-center justify-center transition-all duration-300"
->
-  <FaPlay className="text-white text-[34px] drop-shadow-lg" />
-</motion.button>
+            {/* Play Button */}
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setOpen(true)}
+              className="relative z-10 w-24 h-24 rounded-full flex items-center justify-center transition-all duration-300"
+            >
+              <FaPlay className="text-white text-[34px] drop-shadow-lg" />
+            </motion.button>
 
-</div>
+          </div>
         </div>
       </section>
 

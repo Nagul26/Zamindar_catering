@@ -4,12 +4,12 @@ import Navigation from './sections/Navigation';
 import Hero from './sections/Hero';
 import About from './sections/About';
 import EventsWeCater from './sections/EventsWeCater';
-// import StickyCards from './components/StickyCards/StickyCards'
 import WhyChooseUs from './sections/WhyChooseUs';
 import Services from './sections/Services';
 import VideoShow from './sections/VideoShow';
+import MeetTeam from './sections/MeetTeam';
 import Gallery from './sections/Gallery';
-import Testimonials from './sections/Testimonials';
+// import Testimonials from './sections/Testimonials';
 import ContactForm from './sections/ContactForm';
 import CateringCTA from './sections/CateringCTA';
 import Footer from './sections/Footer';
@@ -54,8 +54,6 @@ function App() {
         {/* Events We Cater Section */}
         <EventsWeCater />
 
-        {/* <StickyCards /> */}
-
         {/* 3. Why Choose Us */}
         <WhyChooseUs />
 
@@ -64,11 +62,14 @@ function App() {
 
         <VideoShow />
 
+        {/* Meet the Team Showcase */}
+        <MeetTeam />
+
         {/* 10. Gallery Showcase */}
         <Gallery />
 
         {/* 13. Customer Testimonials */}
-        <Testimonials />
+        {/* <Testimonials /> */}
 
         {/* 15. Contact / Booking Form */}
         <ContactForm />

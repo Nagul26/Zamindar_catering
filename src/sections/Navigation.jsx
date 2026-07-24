@@ -21,13 +21,25 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
+  // const navLinks = [
+  //   { name: 'Home', target: 'home' },
+  //   { name: 'About', target: 'about' },
+  //   { name: 'Services', target: 'services' },
+  //   { name: 'Menu', target: 'menu' },
+  //   { name: 'Gallery', target: 'gallery' },
+  //   { name: 'Contact', target: 'contact' },
+  // ];
+
+  const leftLinks = [
     { name: 'Home', target: 'home' },
     { name: 'About', target: 'about' },
     { name: 'Services', target: 'services' },
     { name: 'Menu', target: 'menu' },
     { name: 'Gallery', target: 'gallery' },
-    { name: 'Contact', target: 'contact' },
+  ];
+
+  const rightLinks = [
+   
   ];
 
   return (
@@ -36,77 +48,119 @@ const Navigation = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8 }}
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 lg:px-8 pt-4 lg:pt-6 pointer-events-none"
+        className={`fixed top-0 left-0 right-0 z-20 w-full transition-all duration-300 ease-in-out border-b flex justify-center ${
+          isScrolled
+            ? 'bg-[#F5F0E8]/90 backdrop-blur-md border-black/5 shadow-[0_4px_30px_rgba(0,0,0,0.03)] py-1.5 md:py-2'
+            : 'bg-[#F5F0E8]/90 border-transparent py-3 md:py-4'
+        }`}
       >
-        <div
-          className={`pointer-events-auto w-full max-w-[1450px] rounded-full border transition-all duration-500 ease-in-out flex items-center justify-between ${
-            isScrolled
-              ? 'px-6 lg:px-8 border-black/5 bg-[#F5F0E8]/85 backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.06)]'
-              : 'px-6 lg:px-10 border-transparent bg-white shadow-none'
-          }`}
-        >
-          {/* Logo */}
-          <Link
-            to="home"
-            smooth={true}
-            duration={800}
-            className="cursor-pointer flex flex-col items-start"
-          >
-            <motion.img
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              src={logo}
-              alt="Zamindar Catering"
-              className="h-16 sm:h-18 lg:h-20 w-auto object-contain rounded-md"
-            />
-          </Link>
+        <div className="w-full max-w-[1500px] px-6 sm:px-10 lg:px-12 flex items-center justify-between">
+          {/* Desktop Navigation Layout */}
+          <div className="hidden lg:flex items-center justify-between w-full">
+            {/* Left Links */}
+            <div className="flex-1 flex justify-start">
+              <ul className="flex items-center space-x-10">
+                {leftLinks.map((link) => (
+                  <li key={link.target}>
+                    <Link
+                      to={link.target}
+                      spy={true}
+                      smooth={true}
+                      offset={-80}
+                      duration={800}
+                      activeClass="!text-gold font-semibold"
+                      className="font-sans text-xs uppercase tracking-[0.2em] text-luxury-black hover:text-gold transition-colors duration-300 cursor-pointer py-2 block relative group"
+                    >
+                      <span className="relative z-10">{link.name}</span>
+                      <span className="absolute bottom-1.5 left-0 w-full h-[1.5px] bg-gold scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center space-x-10">
-            <ul className="flex items-center space-x-8">
-              {navLinks.map((link) => (
-                <li key={link.target}>
-                  <Link
-                    to={link.target}
-                    spy={true}
-                    smooth={true}
-                    offset={-80}
-                    duration={800}
-                    activeClass="!text-gold font-semibold"
-                    className="font-sans text-xs uppercase tracking-[0.2em] text-luxury-black hover:text-gold transition-colors duration-300 cursor-pointer py-2 block relative group"
-                  >
-                    <span className="relative z-10">{link.name}</span>
-                    <span className="absolute bottom-1.5 left-0 w-full h-[1.5px] bg-gold scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <Link
-              to="contact"
-              smooth={true}
-              offset={-80}
-              duration={800}
-              className="cursor-pointer"
-            >
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="px-6 py-2.5 bg-warm-brown text-white hover:bg-gold hover:text-luxury-black border border-warm-brown hover:border-gold font-sans text-xs uppercase tracking-[0.2em] transition-all duration-300 rounded-full shadow-sm"
+            {/* Center Logo */}
+            <div className="flex-shrink-0 flex justify-center mx-8">
+              <Link
+                to="home"
+                smooth={true}
+                duration={800}
+                className="cursor-pointer flex flex-col items-center"
               >
-                Book Now
-              </motion.button>
-            </Link>
+                <motion.img
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                  src={logo}
+                  alt="Zamindar Catering"
+                  className="h-16 sm:h-18 lg:h-22 w-auto object-contain rounded-md"
+                />
+              </Link>
+            </div>
+
+            {/* Right Links & Button */}
+            <div className="flex-1 flex justify-end items-center space-x-10">
+              <ul className="flex items-center space-x-10">
+                {rightLinks.map((link) => (
+                  <li key={link.target}>
+                    <Link
+                      to={link.target}
+                      spy={true}
+                      smooth={true}
+                      offset={-80}
+                      duration={800}
+                      activeClass="!text-gold font-semibold"
+                      className="font-sans text-xs uppercase tracking-[0.2em] text-luxury-black hover:text-gold transition-colors duration-300 cursor-pointer py-2 block relative group"
+                    >
+                      <span className="relative z-10">{link.name}</span>
+                      <span className="absolute bottom-1.5 left-0 w-full h-[1.5px] bg-gold scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                to="contact"
+                smooth={true}
+                offset={-80}
+                duration={800}
+                className="cursor-pointer"
+              >
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="px-5 py-2 bg-warm-brown text-white hover:bg-gold hover:text-luxury-black border border-warm-brown hover:border-gold font-sans text-xs uppercase tracking-[0.2em] transition-all duration-300 rounded-full shadow-sm"
+                >
+                  Book Now
+                </motion.button>
+              </Link>
+            </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden text-luxury-black hover:text-gold transition-colors duration-300 p-2 focus:outline-none flex items-center justify-center rounded-full hover:bg-black/5"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
-          </button>
+          {/* Mobile Navigation Layout */}
+          <div className="flex lg:hidden items-center justify-between w-full">
+            {/* Logo on Left */}
+            <Link
+              to="home"
+              smooth={true}
+              duration={800}
+              className="cursor-pointer flex flex-col items-start"
+            >
+              <img
+                src={logo}
+                alt="Zamindar Catering"
+                className="h-18 w-auto object-contain rounded-md"
+              />
+            </Link>
+
+            {/* Hamburger Button on Right */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-luxury-black hover:text-gold transition-colors duration-300 p-2 focus:outline-none flex items-center justify-center rounded-full hover:bg-black/5"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
+            </button>
+          </div>
         </div>
       </motion.nav>
 
@@ -128,7 +182,7 @@ const Navigation = () => {
                 <HiX size={24} />
               </button>
             </div>
-
+{/* 
             <ul className="flex flex-col space-y-6 text-center mb-10">
               {navLinks.map((link) => (
                 <li key={link.target}>
@@ -152,7 +206,7 @@ const Navigation = () => {
                   </Link>
                 </li>
               ))}
-            </ul>
+            </ul> */}
 
             <div className="flex justify-center">
               <Link

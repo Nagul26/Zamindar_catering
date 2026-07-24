@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
-import SectionHeader from "../components/SectionHeader";
-
-import serviceLive from "../assets/service_live.png";
 
 const Services = () => {
   const services = [
+    {
+      title: "CORPORATE MENU",
+      description: "Crafted cocktails, wines, and soft pairings.",
+      image: "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1200&q=80",
+    },
     {
       title: "SOCIAL EVENTS",
       description:
@@ -22,17 +24,11 @@ const Services = () => {
         "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80",
     },
     {
-      title: "CORPORATE EVENTS",
+      title: "WEDDING EVENTS",
       description:
         "Professional catering services for conferences and corporate meetings.",
       image:
         "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
-    },
-    {
-      title: "LIVE FOOD STATION",
-      description:
-        "Interactive live cooking counters with experienced master chefs.",
-      image: serviceLive,
     },
     {
       title: "OUTDOOR CATERING",
@@ -41,32 +37,57 @@ const Services = () => {
       image:
         "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=1200&q=80",
     },
+    {
+      title: "MODERN DINNER",
+      description: "Sweet finishes, both bold and nostalgic.",
+      image: "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&w=1200&q=80",
+    },
   ];
 
-  // Duplicate cards for seamless loop
-  const marqueeCards = [...services, ...services];
-
-  const [pause, setPause] = useState(false);
-
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [pause, setPause] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+  const [cardsToShow, setCardsToShow] = useState(4);
 
+  // Responsive breakpoints matching Tailwind
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setCardsToShow(4);
+      } else if (window.innerWidth >= 768) {
+        setCardsToShow(2);
+      } else {
+        setCardsToShow(1);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Automatic scroll interval every 4 seconds
   useEffect(() => {
     if (pause) return;
-
     const interval = setInterval(() => {
-    setCurrentIndex((prev) =>
-      prev === services.length - 1 ? 0 : prev + 1
-    );
-  }, 3000);
-
+      setIsTransitioning(true);
+      setCurrentIndex((prev) => prev + 1);
+    }, 4000);
     return () => clearInterval(interval);
   }, [pause]);
+
+  // Seamless infinite loop snap back to index 0
+  const handleAnimationComplete = () => {
+    if (currentIndex >= services.length) {
+      setIsTransitioning(false);
+      setCurrentIndex(0);
+    }
+  };
 
 
     return (
     <section
       id="services"
-      className="relative overflow-hidden bg-[#F7F1E5] py-24 lg:py-32"
+      className="relative overflow-hidden  py-24 lg:py-32"
     >
       {/* Background Decoration */}
       <div className="absolute inset-0 overflow-hidden">
@@ -129,102 +150,83 @@ const Services = () => {
 
         </motion.div>
 
-        {/* Marquee Container */}
-
+        {/* Slider Container with Faded Edges */}
         <div
-          className="relative overflow-hidden"
+          className="relative overflow-hidden w-full px-2"
           onMouseEnter={() => setPause(true)}
           onMouseLeave={() => setPause(false)}
         >
+          {/* Subtle Side Fades for Premium Look */}
+          <div className="left-0 top-0 z-20 h-full w-12 md:w-24 bg-gradient-to-r from-[#F7F1E5] to-transparent absolute pointer-events-none" />
+          <div className="right-0 top-0 z-20 h-full w-12 md:w-24 bg-gradient-to-l from-[#F7F1E5] to-transparent absolute pointer-events-none" />
 
-          {/* Left Fade */}
-
-          <div className="left-0 top-0 z-20 h-full w-32 " />
-
-          {/* Right Fade */}
-
-          <div className=" right-0 top-0 z-20 h-full w-32 " />
-
-          
-
-          {/* Sliding Cards */}
-
+          {/* Sliding Wrapper */}
           <div className="overflow-hidden">
-
-          <motion.div
-            animate={{
-              x: `-${currentIndex * 25}%`,
-            }}
-            transition={{
-              duration: 0.10,
-              ease: "easeInOut",
-            }}
-            className="flex"
-        >
-
-            {[...services, ...services].map((service, index) => (
-
-              <div
-                key={index}
-                className="w-1/4 min-w-[330px] px-4 flex-shrink-0"
-              >
-
-                <motion.div
-                  whileHover={{
-                    y: -12,
-                    scale: 1.02,
-                  }}
-                  transition={{ duration: 0.4 }}
-                  className="group rounded-[32px] overflow-hidden shadow-xl border border-[#E7DCCB] cursor-pointer h-[560px]"
+            <motion.div
+              animate={{
+                x: `-${currentIndex * (100 / cardsToShow)}%`,
+              }}
+              transition={
+                isTransitioning
+                  ? {
+                      duration: 0.8,
+                      ease: [0.16, 1, 0.3, 1], // Premium easeOutExpo
+                    }
+                  : {
+                      duration: 0,
+                    }
+              }
+              onAnimationComplete={handleAnimationComplete}
+              className="flex"
+            >
+              {[...services, ...services].map((service, index) => (
+                <div
+                  key={index}
+                  className={`px-4 flex-shrink-0 ${
+                    cardsToShow === 4
+                      ? "w-1/4"
+                      : cardsToShow === 2
+                      ? "w-1/2"
+                      : "w-full"
+                  }`}
                 >
-                  {/* Image */}
-                  <div className="relative h-[240px] overflow-hidden">
-
-                    <motion.img
-                      src={service.image}
-                      alt={service.title}
-                      whileHover={{ scale: 1.08 }}
-                      transition={{ duration: 0.6 }}
-                      className="w-full h-full object-cover"
-                    />
-
-                    {/* Dark Overlay */}
-                    {/* <div className="absolute inset-0 bg-black/10 group-hover:bg-black/25 transition-all duration-500" /> */}
-
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex flex-col justify-between h-[220px] p-2 pt-16">
-
-                    <div>
-
-                      <div className="flex items-center justify-between">
-
-                        <h3 className="font-sfc-primorsa text-[34px] leading-tight text-[#4A2D14]">
-                          {service.title}
-                        </h3>
-
-                      </div>
-
-                      <p className="mt-5 text-[#6A625B] text-[15px]">
-                        {service.description}
-                      </p>
-
+                  <motion.div
+                    whileHover={{
+                      y: -12,
+                    }}
+                    className="group bg-[#FAF6EE] border-2 border-white rounded-[32px] p-4 pb-10 cursor-pointer flex flex-col justify-between shadow-[0_15px_30px_rgba(80,60,40,0.03)] transition-all duration-300 h-[520px]"
+                  >
+                    {/* Image Container with Inset Padding */}
+                    <div className="relative h-[220px] w-full rounded-[24px] overflow-hidden">
+                      <motion.img
+                        src={service.image}
+                        alt={service.title}
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.6 }}
+                        className="w-full h-full object-cover rounded-[24px]"
+                      />
                     </div>
 
-                  </div>
+                    {/* Centered Content */}
+                    <div className="flex-grow flex flex-col items-center justify-center text-center mt-8">
+                      <h3 className="font-sfc-primorsa text-[28px] tracking-[0.06em] leading-tight text-[#4A2D14] uppercase">
+                        {service.title.split(" ").map((word, idx) => (
+                          <React.Fragment key={idx}>
+                            {word}
+                            {idx < service.title.split(" ").length - 1 && <br />}
+                          </React.Fragment>
+                        ))}
+                      </h3>
 
-                </motion.div>
-      
-              </div>
-
-            ))}
-
-        </motion.div>
-          
-
-        </div>
-
+                      <p className="mt-5 text-[#6A625B] text-[14px] leading-relaxed max-w-[240px] font-light">
+                        {service.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
                 {/* Bottom Content */}
 

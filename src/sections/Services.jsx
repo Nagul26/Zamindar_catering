@@ -40,7 +40,8 @@ const Services = () => {
     {
       title: "MODERN DINNER",
       description: "Sweet finishes, both bold and nostalgic.",
-      image: "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&w=1200&q=80",
+      image: 
+      "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&w=1200&q=80",
     },
   ];
 

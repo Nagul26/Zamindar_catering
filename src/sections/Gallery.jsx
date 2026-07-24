@@ -29,7 +29,7 @@ const Gallery = () => {
       id: 4,
       title: 'Bespoke Plating',
       category: 'Fine Dining',
-      url: 'https://images.unsplash.com/photo-1581579438747-1dc8d17bbcf4?auto=format&fit=crop&w=1200&q=80',
+      url: 'https://media.istockphoto.com/id/2190243662/photo/delicious-individual-salad-cups-with-fresh-ingredients-on-a-table.webp?a=1&b=1&s=612x612&w=0&k=20&c=SyNNyrzVCk032QIfuirXCKaB1CPZdDXNTowYQu_WWms=',
     }
   ];
 

@@ -11,34 +11,39 @@ import ctaCenter from '../assets/images/catering-table.png';
 // Categories data exactly matching the mockup image
 const categories = [
   {
-    name: 'DELIVERY MENU',
+    name: 'CORPORATE MENU',
     description: 'Raw food & ingredients for home or service splits.',
-    image: 'https://images.unsplash.com/photo-1616531980753-433b934757c3?q=80&w=800&auto=format&fit=crop',
-  },
-  {
-    name: 'HERITAGE MENU',
-    description: 'Slowly cooked, modern and classic techniques.',
-    image: 'https://images.unsplash.com/photo-1601050690597-df056fb4ce78?q=80&w=800&auto=format&fit=crop',
-  },
-  {
-    name: 'MODERN DINNER',
-    description: 'Seasonal produce, high-end food and mixology.',
-    image: 'https://images.unsplash.com/photo-1547886596-f9ab534e8e11?q=80&w=800&auto=format&fit=crop',
-  },
-  {
-    name: 'CATERING WEDDING',
-    description: 'Crafted cocktails, wines, and soft pairings.',
-    image: 'https://images.unsplash.com/photo-1519225495810-7512c696505a?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1200&q=80',
   },
   {
     name: 'SOCIAL EVENTS',
-    description: 'Crafted mocktails, wines, and soft pairings.',
-    image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=800&auto=format&fit=crop',
+    description: 'Slowly cooked, modern and classic techniques.',
+    image: 
+        "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1200&q=80",
   },
   {
-    name: 'CORPORATE MENU',
+    name: 'CATERING WEDDING',
+    description: 'Seasonal produce, high-end food and mixology.',
+    image: 
+        "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    name: 'WEDDING EVENTS',
     description: 'Crafted cocktails, wines, and soft pairings.',
-    image: 'https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=800&auto=format&fit=crop',
+    image: 
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    name: 'OUTDOOR CATERING',
+    description: 'Crafted mocktails, wines, and soft pairings.',
+    image: 
+        "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    name: 'MODERN DINNER',
+    description: 'Crafted cocktails, wines, and soft pairings.',
+    image:
+      "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&w=1200&q=80",
   },
 ];
 

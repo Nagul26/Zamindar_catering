@@ -149,7 +149,7 @@ const MeetTeam = () => {
         {/* Title Block */}
         <div className="text-center mb-16 md:mb-24 flex flex-col items-center">
           <span className="text-[10px] sm:text-xs tracking-[0.3em] font-semibold text-warm-brown uppercase mb-4 flex items-center justify-center gap-2">
-            <span className="text-gold">◇</span> MEET INCREDIBLE PEOPLE <span className="text-gold">◇</span>
+            ✦ MEET INCREDIBLE PEOPLE 
           </span>
           <h2 className="font-sfc-primorsa font-light text-warm-brown leading-[1.08] text-[36px] sm:text-[48px] md:text-[64px] lg:text-[76px] uppercase tracking-wide">
             MEET THE
@@ -161,8 +161,7 @@ const MeetTeam = () => {
         </div>
 
         {/* Asymmetrical Grid of Chefs */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          
+<div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 items-start justify-items-center">          
           {/* Card 1: Chef Alex Johnson (Left) */}
           <motion.div
             custom={0}
@@ -222,19 +221,20 @@ const MeetTeam = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={cardVariants}
-            className="lg:col-span-4 flex flex-col items-start w-[500px]"
+            className="col-span-1 md:col-span-2 lg:col-span-4 flex flex-col items-center lg:items-start w-full max-w-sm md:max-w-md lg:max-w-[400px] mx-auto mt-8 md:mt-10 lg:mt-0"
           >
-            <div className="w-full aspect-[3/4.2] rounded-[24px] overflow-hidden shadow-lg border border-warm-brown/5 relative group">
+            <div className="w-full aspect-[3/4.2] rounded-2xl lg:rounded-[24px] overflow-hidden shadow-lg border border-warm-brown/5 relative group">
               <motion.img
                 src="https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=800&h=1000&q=80"
                 alt="Chef preparing fresh pasta"
                 className="w-full h-full object-cover"
                 whileHover={{ scale: 1.04 }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
               />
-              {/* Overlay with subtle description on hover */}
-              <div className="absolute inset-0 bg-warm-brown-dark/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
-                <span className="font-sfc-primorsa text-white text-xl tracking-wider uppercase font-light">
+
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-warm-brown-dark/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 sm:p-6 lg:p-8">
+                <span className="font-sfc-primorsa text-white text-base sm:text-lg lg:text-xl tracking-wide uppercase font-light leading-snug">
                   Crafting fresh culinary experiences daily
                 </span>
               </div>

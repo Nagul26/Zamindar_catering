@@ -207,23 +207,7 @@ const Footer = () => {
               . All Rights Reserved.
             </p>
 
-            <div className="flex gap-6 text-xs uppercase tracking-wider">
-
-              <a
-                href="#"
-                className="hover:text-[#c8a96a] transition"
-              >
-                Privacy Policy
-              </a>
-
-              <a
-                href="#"
-                className="hover:text-[#c8a96a] transition"
-              >
-                Terms & Conditions
-              </a>
-
-            </div>
+     
 
           </div>
 

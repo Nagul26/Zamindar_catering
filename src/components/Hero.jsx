@@ -79,7 +79,93 @@ const Hero = () => {
 
       {/* Main Content */}
 
-      <div className="relative z-30 flex items-center justify-center min-h-screen lg:min-h-0 lg:h-full w-full px-6 py-24 md:py-32 lg:py-0">
+      <div className="relative z-30 flex items-center justify-center min-h-screen lg:min-h-0 lg:h-full w-full px-6 pt-28 pb-12 md:pt-32 md:pb-16 lg:pt-28 lg:pb-12">
+
+        {/* LEFT IMAGE */}
+
+        <motion.img
+          src={left}
+          alt="hero-left"
+          style={{
+            x: mousePos.x * 0.4,
+          }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            y: [0, -15, 0],
+          }}
+          transition={{
+            y: {
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+            opacity: { duration: 0.9, delay: 0.3 },
+            scale: { duration: 0.9, delay: 0.3 },
+          }}
+          className="
+          hidden
+          lg:block
+          absolute
+          left-4
+          xl:left-12
+          2xl:left-24
+          top-[24%]
+          w-[240px]
+          xl:w-[310px]
+          2xl:w-[360px]
+          rounded-[28px]
+          rotate-[-8deg]
+          shadow-2xl
+          object-cover
+          pointer-events-none
+          z-10
+          "
+        />
+
+        {/* RIGHT IMAGE */}
+
+        <motion.img
+          src={right}
+          alt="hero-right"
+          style={{
+            x: mousePos.x * -0.3,
+          }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            y: [0, 15, 0],
+          }}
+          transition={{
+            y: {
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+            opacity: { duration: 0.9, delay: 0.3 },
+            scale: { duration: 0.9, delay: 0.3 },
+          }}
+          className="
+          hidden
+          lg:block
+          absolute
+          right-4
+          xl:right-12
+          2xl:right-24
+          top-[18%]
+          w-[200px]
+          xl:w-[260px]
+          2xl:w-[310px]
+          rounded-[28px]
+          rotate-[8deg]
+          shadow-2xl
+          object-cover
+          pointer-events-none
+          z-10
+          "
+        />
 
         <motion.div
           variants={containerVariants}
@@ -87,66 +173,6 @@ const Hero = () => {
           animate="show"
           className="relative w-full max-w-7xl mx-auto flex flex-col justify-center"
         >
-
-          {/* LEFT IMAGE */}
-
-          <motion.img
-            src={left}
-            alt="hero-left"
-            style={{
-              x: mousePos.x * 0.4,
-              y: mousePos.y * 0.4,
-            }}
-            animate={{
-              y: [0, -15, 0],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-            }}
-            className="
-            hidden
-            lg:block
-            absolute
-            left-0
-            top-20
-            w-[360px]
-            rounded-[28px]
-            rotate-[-8deg]
-            shadow-2xl
-            object-cover
-            "
-          />
-
-          {/* RIGHT IMAGE */}
-
-          <motion.img
-            src={right}
-            alt="hero-right"
-            style={{
-              x: mousePos.x * -0.3,
-              y: mousePos.y * -0.3,
-            }}
-            animate={{
-              y: [0, 15, 0],
-            }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-            }}
-            className="
-            hidden
-            lg:block
-            absolute
-            right-0
-            top-0
-            w-[300px]
-            rounded-[28px]
-            rotate-[8deg]
-            shadow-2xl
-            object-cover
-            "
-          />
 
           {/* CENTER CONTENT */}
 

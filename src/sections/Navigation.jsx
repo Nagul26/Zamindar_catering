@@ -21,14 +21,14 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // const navLinks = [
-  //   { name: 'Home', target: 'home' },
-  //   { name: 'About', target: 'about' },
-  //   { name: 'Services', target: 'services' },
-  //   { name: 'Menu', target: 'menu' },
-  //   { name: 'Gallery', target: 'gallery' },
-  //   { name: 'Contact', target: 'contact' },
-  // ];
+  const navLinks = [
+    { name: 'Home', target: 'home' },
+    { name: 'About', target: 'about' },
+    { name: 'Services', target: 'services' },
+    { name: 'Menu', target: 'menu' },
+    { name: 'Gallery', target: 'gallery' },
+    { name: 'Contact', target: 'contact' },
+  ];
 
   const leftLinks = [
     { name: 'Home', target: 'home' },
@@ -48,10 +48,10 @@ const Navigation = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8 }}
-        className={`fixed top-0 left-0 right-0 z-20 w-full transition-all duration-300 ease-in-out border-b flex justify-center ${
+        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ease-in-out border-b flex justify-center ${
           isScrolled
             ? 'bg-[#F5F0E8]/90 backdrop-blur-md border-black/5 shadow-[0_4px_30px_rgba(0,0,0,0.03)] py-1.5 md:py-2'
-            : 'bg-[#F5F0E8]/90 border-transparent py-3 md:py-4'
+            : 'bg-[#F5F0E8] border-transparent py-3 md:py-4'
         }`}
       >
         <div className="w-full max-w-[1500px] px-6 sm:px-10 lg:px-12 flex items-center justify-between">
@@ -172,7 +172,7 @@ const Navigation = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-0 left-0 w-full h-screen bg-[#F5F0E8]/98 backdrop-blur-xl z-40 flex flex-col justify-center px-8"
+            className="fixed top-0 left-0 w-full h-screen bg-[#F5F0E8]/98 backdrop-blur-xl z-[60] flex flex-col justify-center px-8"
           >
             <div className="absolute top-6 right-6">
               <button
@@ -182,7 +182,7 @@ const Navigation = () => {
                 <HiX size={24} />
               </button>
             </div>
-{/* 
+
             <ul className="flex flex-col space-y-6 text-center mb-10">
               {navLinks.map((link) => (
                 <li key={link.target}>
@@ -206,7 +206,7 @@ const Navigation = () => {
                   </Link>
                 </li>
               ))}
-            </ul> */}
+            </ul>
 
             <div className="flex justify-center">
               <Link
